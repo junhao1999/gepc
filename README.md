@@ -17,13 +17,9 @@ Detailed dependencies are provided in the 'environment.txt' file.
 ## Getting Started
 ```
 git clone https://github.com/amirmk89/gepc
-cd data
+cd gepc/data
 ./unpack.sh  # Unpack pose data, GT, and patch data (sample only)
 
-# Conda environment setup
-cd ..
-conda env create -n gepc -f environment.txt
-pip install lmdb
 ```
 
 ## Directory Structure
@@ -34,7 +30,6 @@ pip install lmdb
 ├── data            -- Configurable and may be moved
 ├── LICENSE  
 ├── README.md
-├── environment.txt      -- For creating the conda environment
 └── stc_train_eval.py     -- Main file for training / inference
 ```
 
@@ -63,9 +58,9 @@ creating symlinks inside the project's data directory.
 
 
 ### Patch Training
-For running the patch based variant, it is needed to download the [ShanghaiTech Campus dataset](https://svip-lab.github.io/dataset/campus_dataset.html), and extract it according
-to the specified data directory structure. The training data is provided in video clips while the test data is provided
-as individual frames. For training it is required to split the input training videos to individual frames, e.g. using FFMPEG.
+For running the patch based variant, it is needed to download the [ShanghaiTech Campus dataset](https://svip-lab.github.io/dataset/campus_dataset.html), and extract it according to the specified data directory structure. The training data is provided in video 
+clips while the test data is provided as individual frames. For training it is required to split the input training videos to 
+individual frames, e.g. using FFMPEG.
 
 The model supports patch training using both frame .jpeg files and using a serialized patch file in lmdb format. 
 For performance reasons, the use of patch DB files is highly recommended. 
@@ -78,14 +73,15 @@ A script for creating the serialized patch DB files is provided in the data dire
 Assuming data is located in the expected path (or --data_dir argument is used), pose based training is run
 using:
 ```
-python stc_train_eval.py
+python3 stc_train_eval.py
 ```
 A shorter run with a fraction of the data can be done the verify everything is properly set using the --debug flag.
 
 ### Patch Training
 Use the following command (assuming a pre-extracted patch DB):
 ```
-python stc_train_eval.py --patch_features --patch_db -ae_b 256 -dcec_b 256 -res_b 128 
+python3 stc_train_eval.py --patch_features --patch_db -ae_b 256 -dcec_b 256 -res_b 128 
+
 ```
 
 
